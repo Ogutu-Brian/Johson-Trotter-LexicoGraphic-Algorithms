@@ -129,7 +129,7 @@ void johnson_trotter(string input_string){
     vector<Element> directed_integers;
     vector<int> mobile_indices;
 
-    for(char &c:input_string){
+    for(char c:input_string){
         Element element;
         element.value = c;
         element.direction = LEFT;
@@ -160,6 +160,7 @@ void johnson_trotter(string input_string){
 
         switch_permutation_directions(directed_integers,largest_ement);
 
+        cout<<"\n";
         print_permutation(directed_integers);
 
         assign_mobile_properties(directed_integers);
@@ -169,9 +170,10 @@ void johnson_trotter(string input_string){
     }
 }
 
-void lexicographic_permute(string input_string){
 
-}
+//void lexicographic_permute(string input_string){
+//   for(char &c: input)
+//}
 
 int main(){
     //    string input_string;
@@ -180,10 +182,10 @@ int main(){
     //    cin>>input_string;
     //    cout<<std::endl;
 
-//    cout<<"JOHNSON TROTTER ALGORITHM"<<endl;
-//    johnson_trotter("ABCDE");
-//    cout<<"\n";
+    cout<<"JOHNSON TROTTER ALGORITHM"<<endl;
+    johnson_trotter("1234");
+    cout<<"\n";
 
-    cout<<"LEXICOGRAPHIC ALGORITHM"<<endl;
-    lexicographic_permute("1234");
+//    cout<<"LEXICOGRAPHIC ALGORITHM"<<endl;
+//    lexicographic_permute("1234");
 }
