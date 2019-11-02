@@ -13,6 +13,8 @@ struct Element{
 };
 
 void print_directions(vector<Element> directed_integers){
+    cout<<"\t";
+
     for(Element element: directed_integers){
         if(element.direction == LEFT){
             cout<<"<-";
@@ -25,6 +27,8 @@ void print_directions(vector<Element> directed_integers){
 }
 
 void print_elements(vector<Element> directed_integers){
+    cout<<"\t";
+
     for(Element element: directed_integers){
         cout<<element.value<<" ";
     }
@@ -75,6 +79,7 @@ void assign_mobile_properties(vector<Element> &directed_integers){
 void swap_elements(Element &element, Element &neighbour){
     char temp_value = element.value;
     string temp_direction = element.direction;
+
     element.value = neighbour.value;
     element.direction = neighbour.direction;
     neighbour.value = temp_value;
@@ -133,11 +138,16 @@ void johnson_trotter(string input_string){
         directed_integers.push_back(element);
     }
 
+    cout <<"1: ";
     print_permutation(directed_integers);
     mobile_indices = get_mobile_indices(directed_integers);
 
+    int count = 2;
+
     while(mobile_indices.size() > 0){
+        cout<<count<<": ";
         int largest_mobile_index = get_largest_index(mobile_indices,directed_integers);
+
         Element largest_ement = directed_integers[largest_mobile_index];
 
         if(directed_integers[largest_mobile_index].direction == LEFT && largest_mobile_index != 0){
@@ -154,7 +164,13 @@ void johnson_trotter(string input_string){
 
         assign_mobile_properties(directed_integers);
         mobile_indices= get_mobile_indices(directed_integers);
+
+        count++;
     }
+}
+
+void lexicographic_permute(string input_string){
+
 }
 
 int main(){
@@ -164,7 +180,10 @@ int main(){
     //    cin>>input_string;
     //    cout<<std::endl;
 
-    cout<<"JOHNSON TROTTER ALGORITHM"<<endl;
+//    cout<<"JOHNSON TROTTER ALGORITHM"<<endl;
+//    johnson_trotter("ABCDE");
+//    cout<<"\n";
 
-    johnson_trotter("1234");
+    cout<<"LEXICOGRAPHIC ALGORITHM"<<endl;
+    lexicographic_permute("1234");
 }
