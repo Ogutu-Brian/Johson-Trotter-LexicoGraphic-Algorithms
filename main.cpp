@@ -74,8 +74,11 @@ void assign_mobile_properties(vector<Element> &directed_integers){
 
 void swap_elements(Element &element, Element &neighbour){
     char temp_value = element.value;
+    string temp_direction = element.direction;
     element.value = neighbour.value;
+    element.direction = neighbour.direction;
     neighbour.value = temp_value;
+    neighbour.direction = temp_direction;
 }
 
 
@@ -109,7 +112,8 @@ int get_largest_index(vector<int> indices,vector<Element> directed_integers){
 
     for(int i = 1; i < indices.size(); i++){
         if(largest_element.value < directed_integers[indices[i]].value){
-            largest_index = i;
+            largest_index = indices[i];
+            largest_element.value = directed_integers[indices[i]].value;
         }
     }
 
@@ -134,6 +138,7 @@ void johnson_trotter(string input_string){
 
     while(mobile_indices.size() > 0){
         int largest_mobile_index = get_largest_index(mobile_indices,directed_integers);
+        Element largest_ement = directed_integers[largest_mobile_index];
 
         if(directed_integers[largest_mobile_index].direction == LEFT && largest_mobile_index != 0){
             swap_elements(directed_integers[largest_mobile_index],directed_integers[largest_mobile_index - 1]);
@@ -143,7 +148,7 @@ void johnson_trotter(string input_string){
             }
         }
 
-        switch_permutation_directions(directed_integers,directed_integers[largest_mobile_index]);
+        switch_permutation_directions(directed_integers,largest_ement);
 
         print_permutation(directed_integers);
 
