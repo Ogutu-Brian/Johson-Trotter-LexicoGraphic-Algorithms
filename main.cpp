@@ -246,16 +246,33 @@ void lexicographic_permute(string input_string){
 }
 
 int main(){
-    //    string input_string;
+//    string input_string;
 
-    //    cout<<"Enter a string: ";
-    //    cin>>input_string;
-    //    cout<<std::endl;
+//    cout<<"Enter a string: ";
+//    cin>>input_string;
+//    cout<<std::endl;
 
-    //    cout<<"JOHNSON TROTTER ALGORITHM"<<endl;
-    //    johnson_trotter("1234");
-    //    cout<<"\n";
+    cout<<"JOHNSON TROTTER ALGORITHM\n"<<endl;
+    johnson_trotter("1234");
+    cout<<"\n";
 
-    cout<<"LEXICOGRAPHIC ALGORITHM"<<endl;
+    cout<<"LEXICOGRAPHIC ALGORITHM\n"<<endl;
+    lexicographic_permute("1234");
+    cout<<"\n";
+
+    cout<<"JOHNSON TROTTER ALGORITHM\n"<<endl;
+    johnson_trotter("ACT");
+    cout<<"\n";
+
+    cout<<"LEXICOGRAPHIC ALGORITHM\n"<<endl;
+    lexicographic_permute("ACT");
+    cout<<"\n";
+
+    cout<<"JOHNSON TROTTER ALGORITHM\n"<<endl;
+    johnson_trotter("ABCDE");
+    cout<<"\n";
+
+    cout<<"LEXICOGRAPHIC ALGORITHM\n"<<endl;
     lexicographic_permute("ABCDE");
+    cout<<"\n";
 }
