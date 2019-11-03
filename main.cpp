@@ -90,11 +90,11 @@ void swap_elements(Element &element, Element &neighbour){
 void switch_permutation_directions(vector<Element> &directed_integers, Element current_element){
     for(Element &element: directed_integers){
         if(element.value > current_element.value){
-           if(element.direction == LEFT){
-               element.direction = RIGHT;
-           }else{
-               element.direction = LEFT;
-           }
+            if(element.direction == LEFT){
+                element.direction = RIGHT;
+            }else{
+                element.direction = LEFT;
+            }
         }
     }
 }
@@ -154,7 +154,7 @@ void johnson_trotter(string input_string){
             swap_elements(directed_integers[largest_mobile_index],directed_integers[largest_mobile_index - 1]);
         }else{
             if(largest_mobile_index != directed_integers.size() - 1){
-               swap_elements(directed_integers[largest_mobile_index],directed_integers[largest_mobile_index + 1]);
+                swap_elements(directed_integers[largest_mobile_index],directed_integers[largest_mobile_index + 1]);
             }
         }
 
@@ -186,7 +186,9 @@ void print_lexicographic_chars(vector<char> container,int i, int j){
         cout<<c;
     }
 
-    cout<<"\t"<<"i="<<i<<"\t"<<"j="<<j<<endl;
+    if(i != -1){
+        cout<<"\t"<<"i="<<i<<"\t"<<"j="<<j<<endl;
+    }
 }
 
 int get_ceiling(int index, vector<char> container){
@@ -211,27 +213,36 @@ void swap_chars(char &current, char &previous){
 void lexicographic_permute(string input_string){
     vector<char> container;
 
-   for(char c: input_string){
-       container.push_back(c);
-   }
+    for(char c: input_string){
+        container.push_back(c);
+    }
 
-   int i = get_smaller_rigtmost_char_index(container);
-   int count = 1;
+    int i = get_smaller_rigtmost_char_index(container);
+    int j = get_ceiling(i,container);
 
-   while(i != -1){
-       cout<<count<<":"<<"\t";
+    cout<<"1:\t";
 
-       int j = get_ceiling(i,container);
-       print_lexicographic_chars(container,i,j);
-       swap_chars(container[i],container[j]);
+    print_lexicographic_chars(container,i,j);
 
-       sort(container.begin() + ( i + 1), container.end());
-       cout<<"\n"<<endl;
+    cout<<"\n";
 
-       i = get_smaller_rigtmost_char_index(container);
+    int count = 2;
 
-       count++;
-   }
+    while(i != -1){
+        cout<<count<<":"<<"\t";
+
+        swap_chars(container[i],container[j]);
+        sort(container.begin() + ( i + 1), container.end());
+
+        i = get_smaller_rigtmost_char_index(container);
+        j = get_ceiling(i,container);
+
+        print_lexicographic_chars(container,i,j);
+
+        cout<<"\n"<<endl;
+
+        count++;
+    }
 }
 
 int main(){
@@ -241,10 +252,10 @@ int main(){
     //    cin>>input_string;
     //    cout<<std::endl;
 
-//    cout<<"JOHNSON TROTTER ALGORITHM"<<endl;
-//    johnson_trotter("1234");
-//    cout<<"\n";
+    //    cout<<"JOHNSON TROTTER ALGORITHM"<<endl;
+    //    johnson_trotter("1234");
+    //    cout<<"\n";
 
     cout<<"LEXICOGRAPHIC ALGORITHM"<<endl;
-    lexicographic_permute("1234");
+    lexicographic_permute("ABCDE");
 }
