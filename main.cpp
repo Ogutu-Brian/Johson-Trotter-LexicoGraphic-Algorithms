@@ -171,9 +171,68 @@ void johnson_trotter(string input_string){
 }
 
 
-//void lexicographic_permute(string input_string){
-//   for(char &c: input)
-//}
+int get_smaller_rigtmost_char_index(vector<char> container){
+    for(int i = container.size() - 2; i >= 0; i--){
+        if(container[i] < container[i + 1]){
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+void print_lexicographic_chars(vector<char> container,int i, int j){
+    for(char c: container){
+        cout<<c;
+    }
+
+    cout<<"\t"<<"i="<<i<<"\t"<<"j="<<j<<endl;
+}
+
+int get_ceiling(int index, vector<char> container){
+    int ceiling = index + 1;
+
+    for(int i = index + 2; i < container.size(); i++){
+        if((container[ceiling] > container[i]) && (container[i]) > container[index]){
+            ceiling = i;
+        }
+    }
+
+    return ceiling;
+}
+
+void swap_chars(char &current, char &previous){
+    char temp = current;
+
+    current = previous;
+    previous = temp;
+}
+
+void lexicographic_permute(string input_string){
+    vector<char> container;
+
+   for(char c: input_string){
+       container.push_back(c);
+   }
+
+   int i = get_smaller_rigtmost_char_index(container);
+   int count = 1;
+
+   while(i != -1){
+       cout<<count<<":"<<"\t";
+
+       int j = get_ceiling(i,container);
+       print_lexicographic_chars(container,i,j);
+       swap_chars(container[i],container[j]);
+
+       sort(container.begin() + ( i + 1), container.end());
+       cout<<"\n"<<endl;
+
+       i = get_smaller_rigtmost_char_index(container);
+
+       count++;
+   }
+}
 
 int main(){
     //    string input_string;
@@ -182,10 +241,10 @@ int main(){
     //    cin>>input_string;
     //    cout<<std::endl;
 
-    cout<<"JOHNSON TROTTER ALGORITHM"<<endl;
-    johnson_trotter("1234");
-    cout<<"\n";
+//    cout<<"JOHNSON TROTTER ALGORITHM"<<endl;
+//    johnson_trotter("1234");
+//    cout<<"\n";
 
-//    cout<<"LEXICOGRAPHIC ALGORITHM"<<endl;
-//    lexicographic_permute("1234");
+    cout<<"LEXICOGRAPHIC ALGORITHM"<<endl;
+    lexicographic_permute("1234");
 }
